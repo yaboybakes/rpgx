@@ -1,0 +1,49 @@
+.background {
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  font-family: 'Bungee', cursive;
+  color: white;
+  height: 600px;
+}
+
+.title{
+  font-family: 'Bungee', cursive;
+}
+
+.img-size {
+  width: 30px;
+  height: 30px;
+}
+
+.character-box {
+  background: #fff;
+	border: 2px solid black;
+	text-align: center;
+	margin: 0 0 20px;
+  color: black;
+}
+
+.character-green {
+  background: #fff;
+	border: 2px solid green;
+	text-align: center;
+	margin: 0 0 20px;
+  color:black;
+}
+
+.character-red {
+  background: #fff;
+	border: 2px solid red;
+	text-align: center;
+	margin: 0 0 20px;
+  color: black;
+}
+
+.character-black {
+  background: black;
+	border: 2px solid white;
+	text-align: center;
+	margin: 0 0 20px;
+  color: white;
+  left: 10px;
+}
