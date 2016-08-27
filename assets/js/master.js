@@ -35,21 +35,15 @@ var user_choice;
 var character_chosen = false;
 var current_enemy;
 var enemy_chosen = false;
-var o1;
-var o2;
-var o3;
 
 $('.character-box').on('click', function(){
 
     if (!enemy_chosen && character_chosen) {
-      if (enemies_left == 0) {
-        alert("game over!")
-      }
-    var opp_id = $(this).attr("id");
-    current_enemy = characters[opp_id];
-    $(this).appendTo('.defender');
-    $(this).addClass('character-black');
-    enemy_chosen = true;
+      var opp_id = $(this).attr("id");
+      current_enemy = characters[opp_id];
+      $(this).appendTo('.defender');
+      $(this).addClass('character-black');
+      enemy_chosen = true;
     }
 
     if (!character_chosen) {
@@ -64,29 +58,53 @@ $('.character-box').on('click', function(){
                 var opp = opp_class + counter++;
                 $(this).addClass('character-red');
                 $(this).appendTo(opp);
-
               }
         	});
-
       character_chosen = true;
     }
-
 
 });
 
 $('.attack-btn').on('click', function(){
 
-var string = "You did " + user_choice.AP + " damage <br> Your opponent did " + current_enemy.CAP + " damage.";
-$('.game-status').html(string);
 
-user_choice.HP -= current_enemy.CAP;
-current_enemy.HP -= user_choice.AP;
-user_choice.AP = user_choice.AP + user_choice.AP;
-var stat1 = ".character-stat-" + user_choice.n;
-var stat2 = ".character-stat-" + current_enemy.n;
-$(stat1).html("Stat: " + user_choice.HP);
-$(stat2).html("Stat: " + current_enemy.HP);
+  if (!enemy_chosen) {
+    $('.game-status').html("<h1>Choose your opponent!</h1>");
+  }
 
+  if (!character_chosen) {
+    $('.game-status').html("<h1>Choose your character!</h1>");
+  }
+
+
+  var string = "You did " + user_choice.AP + " damage <br> Your opponent did " + current_enemy.CAP + " damage.";
+  $('.game-status').html(string);
+  user_choice.AP += user_choice.AP;
+  user_choice.HP -= current_enemy.CAP;
+  current_enemy.HP -= user_choice.AP;
+
+
+  if (user_choice.HP <= 0) {
+    $('.game-status').html("<h1>YOU LOSE</h1>");
+  }
+
+  if (current_enemy.HP <= 0) {
+    var empty = "Enemy defeated!<br>Choose next opponent";
+    $('.game-status').html(empty);
+    $('.defender').empty();
+    enemy_chosen = false;
+    enemies_left--;
+    if (enemies_left == 0) {
+      $('.game-status').html("<h1>YOU WON</h1>");
+    }
+  }
+
+  if (current_enemy.HP > 0) {
+    var stat1 = ".character-stat-" + user_choice.n;
+    var stat2 = ".character-stat-" + current_enemy.n;
+    $(stat1).html("Stat: " + user_choice.HP);
+    $(stat2).html("Stat: " + current_enemy.HP);
+  }
 
 });
 
